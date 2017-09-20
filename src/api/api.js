@@ -1,5 +1,7 @@
 import 'whatwg-fetch';
-import config from '../../app.config';
+import appConfig from '../../app.config';
+
+let config = appConfig();
 
 export function getContent(types) {
   types = Array.isArray(types) ? types : [types];

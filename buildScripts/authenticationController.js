@@ -1,9 +1,12 @@
 import oauth2 from 'simple-oauth2';
 import env from 'node-env-file';
 import path from 'path';
-import config from '../app.config';
+import {environment} from './envDetect.js';
+import appConfig from '../app.config';
 
-env(path.join(__dirname, '../.env'), {raise: false});
+env(path.join(__dirname, '../.env'), {
+  raise: false
+});
 
 const oauthClient = getClient();
 const tokenConfig = getTokenConfig();
@@ -16,7 +19,7 @@ function getClient() {
       secret: process.env.OAUTH_CLIENT_SECRET,
     },
     auth: {
-      tokenHost: config.baseUrl
+      tokenHost: 'http://headlessnightlyth3vcdx4ci.devcloud.acquia-sites.com'
     }
   }
 
