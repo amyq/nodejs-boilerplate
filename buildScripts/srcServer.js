@@ -21,11 +21,13 @@ app.get('/', function (req, res) {
 
 // Proxy the external API to allow machine-to-machine authentication, per the
 // Oauth client credentials grant flow.
-app.get('/api/:path(*)', [
-  auth.authenticateRequest(),
-  proxy.proxyRequest(),
-  // @todo: add an error handler
-]);
+if (process.env.NODE_ENV !== 'development') { // skip OAuth for local mock api.
+  app.get('/api/:path(*)', [
+    auth.authenticateRequest(),
+    proxy.proxyRequest(),
+    // @todo: add an error handler
+  ]);
+}
 
 app.listen(port, function (err) {
   if (err) {

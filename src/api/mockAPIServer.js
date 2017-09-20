@@ -21,6 +21,6 @@ jsonServer
   .create()
   .use(jsonServer.defaults())
   .use(router)
-  .listen((process.env.PORT || 8081), function () {
+  .listen(8081, function () {
     console.log('Mock API Server is running.');
   });

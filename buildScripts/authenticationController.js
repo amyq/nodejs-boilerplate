@@ -4,6 +4,8 @@ import path from 'path';
 import {environment} from './envDetect.js';
 import appConfig from '../app.config';
 
+let config = appConfig();
+
 env(path.join(__dirname, '../.env'), {
   raise: false
 });
@@ -19,7 +21,7 @@ function getClient() {
       secret: process.env.OAUTH_CLIENT_SECRET,
     },
     auth: {
-      tokenHost: 'http://headlessnightlyth3vcdx4ci.devcloud.acquia-sites.com'
+      tokenHost: config.baseUrl
     }
   }
 
