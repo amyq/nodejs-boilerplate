@@ -11,7 +11,7 @@ let UserSerializer = new JSONAPISerializer('users', {
 });
 
 let NodeSerializer = new JSONAPISerializer('nodes', {
-  attributes: ['id', 'userName', 'email']
+  attributes: ['id', 'nid', 'title', 'created', 'changed']
 });
 
 router_users.render = (req, res) => {
@@ -43,5 +43,5 @@ jsonServer
   .use(jsonServer.defaults())
   .use(router_nodes)
   .listen(8082, function () {
-    console.log('Mock API Server for Nodes is rrunning.');
+    console.log('Mock API Server for Nodes is running.');
   });

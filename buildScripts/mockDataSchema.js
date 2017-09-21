@@ -3,8 +3,8 @@ export const schema_users = {
   "properties": {
     "users": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 8,
+      "minItems": 1,
+      "maxItems": 5,
       "items": {
         "type": "object",
         "properties": {
@@ -34,8 +34,8 @@ export const schema_nodes = {
   "properties": {
     "nodes": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 8,
+      "minItems": 1,
+      "maxItems": 5,
       "items": {
         "type": "object",
         "properties": {
@@ -44,16 +44,36 @@ export const schema_nodes = {
             "unique": true,
             "minimum": 1
           },
-          "userName": {
-            "type": "string",
-            "faker": "internet.userName"
+          "nid": {
+            "type": "number",
+            "unique": true,
+            "chance": {
+              "pickone": [
+                ["1", "6", "11", "17", "33", "45"]
+              ]
+            }
           },
-          "email": {
+          "title": {
             "type": "string",
-            "faker": "internet.email"
-          }
+            "chance": {
+              "pickone": [
+                [
+                  "Unpublished Page",
+                  "Published Page",
+                ]
+              ]
+            }
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "changed": {
+            "type": "string",
+            "format": "date-time"
+          },
         },
-        "required": ["id", "userName", "email"]
+        "required": ["id", "nid", "title", "created", "changed"]
       }
     }
   },

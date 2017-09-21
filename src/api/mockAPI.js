@@ -31,7 +31,7 @@ export function populateAPIDOMUsers(result) {
   let usersBody = "";
   result.forEach(user => {
     usersBody += `<tr>
-        <td>${user.id}</td>
+        <td>${user.attributes.id}</td>
         <td>${user.attributes['user-name']}</td>
         <td>${user.attributes.email}</td>
         </tr>`
@@ -44,14 +44,16 @@ export function populateAPIDOMUsers(result) {
 export function populateAPIDOMNodes(result) {
 
   global.document.getElementById('pageAPI').innerHTML = '<h4>API Data from: ' + baseUrl_Nodes + '</h4>';
-  global.document.getElementById('pageAPI').innerHTML += '<table><thead><th>ID</th><th>User Name</th><th>Email</th></thead><tbody id="nodes"></tbody></table>';
+  global.document.getElementById('pageAPI').innerHTML += '<table><thead><th>ID</th><th>NID</th><th>Title</th><th>Created</th><th>Changed</th></thead><tbody id="nodes"></tbody></table>';
 
   let nodesBody = "";
   result.forEach(nodes => {
     nodesBody += `<tr>
-          <td>${nodes.id}</td>
-          <td>${nodes.attributes['user-name']}</td>
-          <td>${nodes.attributes.email}</td>
+          <td>${nodes.attributes.id}</td>
+          <td>${nodes.attributes.nid}</td>
+          <td>${nodes.attributes.title}</td>
+          <td>${nodes.attributes.created}</td>
+          <td>${nodes.attributes.changed}</td>
           </tr>`
   });
 
