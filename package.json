@@ -10,7 +10,7 @@
   },
   "scripts": {
     "prelocal": "babel-node buildScripts/devMessage.js",
-    "local": "NODE_ENV=development npm-run-all --parallel security-check sass build-dev lint:watch test:watch start-mockapi env-detect",
+    "local": "NODE_ENV=development npm-run-all --parallel sass build-dev lint:watch test:watch start-mockapi env-detect",
     "sass": "node-sass --watch src/sass -o src --importer node_modules/node-sass-import",
     "build-dev": "babel-node buildScripts/srcServer.js",
     "env-detect": "babel-node buildScripts/envDetect.js",

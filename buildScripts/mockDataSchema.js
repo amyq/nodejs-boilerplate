@@ -1,4 +1,4 @@
-export const schema = {
+export const schema_users = {
   "type": "object",
   "properties": {
     "users": {
@@ -13,22 +13,49 @@ export const schema = {
             "unique": true,
             "minimum": 1
           },
-          "firstName": {
+          "userName": {
             "type": "string",
-            "faker": "name.firstName"
-          },
-          "lastName": {
-            "type": "string",
-            "faker": "name.lastName"
+            "faker": "internet.userName"
           },
           "email": {
             "type": "string",
             "faker": "internet.email"
           }
         },
-        "required": ["id", "firstName", "lastName", "email"]
+        "required": ["id", "userName", "email"]
       }
     }
   },
   "required": ["users"]
+};
+
+export const schema_nodes = {
+  "type": "object",
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "unique": true,
+            "minimum": 1
+          },
+          "userName": {
+            "type": "string",
+            "faker": "internet.userName"
+          },
+          "email": {
+            "type": "string",
+            "faker": "internet.email"
+          }
+        },
+        "required": ["id", "userName", "email"]
+      }
+    }
+  },
+  "required": ["nodes"]
 };

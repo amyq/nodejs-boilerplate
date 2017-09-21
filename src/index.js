@@ -9,8 +9,9 @@ import {
 // Imports for Local Mock  / External API
 import {
   getUsers,
-  populateAPIDOM,
-  removeAPIUsers
+  populateAPIDOMUsers,
+  getNodes,
+  populateAPIDOMNodes
 } from './api/mockAPI';
 
 import {
@@ -20,10 +21,10 @@ import {
 
 if (process.env.NODE_ENV === 'development') {
   getUsers().then(result => {
-    // Populate initial API users.
-    populateAPIDOM(result.data);
-    // Remove from local faux db.
-    removeAPIUsers(global.document.getElementsByClassName('deleteUser'));
+    populateAPIDOMUsers(result.data);
+  });
+  getNodes().then(result => {
+    populateAPIDOMNodes(result.data);
   });
 }
 
@@ -32,19 +33,12 @@ if (process.env.NODE_ENV !== 'development') {
   let typesToGet = ['user', 'page'];
   typesToGet.forEach(type => {
     getContent(type).then(result => {
-
       // Populate initial API users.
       updateContentLists(result.shift(), type);
-
-      // @todo: this isn't configured to work with the drupal jsonapi.
-      // Remove from local faux db.
-      // removeAPIUsers(global.document.getElementsByClassName('deleteUser'));
     });
   })
 }
 
-// Populate environment toolbar.
-envToolbar();
 
-// Populate environment block.
-envDump();
+envToolbar(); // Populate environment toolbar.
+envDump(); // Populate environment block.

@@ -19,6 +19,13 @@ div#pageAPI {
   tr:last-child td {
     border-bottom: none;
   }
+  h4 {
+    background: #eee;
+    // display: inline-block;
+    padding: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #F3EEFE;
+  }
 }
 
 div#env-toolbar>div {

@@ -44,6 +44,12 @@ div#pageAPI {
   div#userAPI tr:last-child td,
   div#pageAPI tr:last-child td {
     border-bottom: none; }
+  div#userAPI h4,
+  div#pageAPI h4 {
+    background: #eee;
+    padding: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #F3EEFE; }
 
 div#env-toolbar > div {
   color: #4f4b4b;

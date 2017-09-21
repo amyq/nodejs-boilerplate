@@ -1,48 +1,39 @@
 import 'whatwg-fetch';
-import {
-  environment
-} from '../../buildScripts/envDetect.js';
 
-const baseUrl = 'http://localhost:8081/users';
+const baseUrl_Users = 'http://localhost:8081/users';
+const baseUrl_Nodes = 'http://localhost:8082/nodes';
 
 export function getUsers() {
-  return get('users');
+  return fetchUsers('users');
 }
 
-function deleteUser(id) {
-  return del(`/${id}`);
+export function getNodes() {
+  return fetchNodes('nodes');
 }
 
-function get() {
-  return fetch(baseUrl).then(onSuccess, onError);
+function fetchUsers() {
+  return fetch(baseUrl_Users).then(onSuccess, onError);
 }
 
-function del(url) {
-  const request = new Request(baseUrl + url, {
-    method: 'DELETE'
-  });
-  return fetch(request).then(onSuccess, onError);
+function fetchNodes() {
+  return fetch(baseUrl_Nodes).then(onSuccess, onError);
 }
 
 function onSuccess(response) {
   return response.json();
 }
 
-export function populateAPIDOM(result) {
+export function populateAPIDOMUsers(result) {
 
-  global.document.getElementById('userAPI').innerHTML = '<h4>API Data from: ' + baseUrl;
-  global.document.getElementById('userAPI').innerHTML += '</h4><table><tbody id="users"></tbody></table>';
+  global.document.getElementById('userAPI').innerHTML = '<h4>API Data from: ' + baseUrl_Users + '</h4>';
+  global.document.getElementById('userAPI').innerHTML += '<table><thead><th>ID</th><th>User Name</th><th>Email</th></thead><tbody id="users"></tbody></table>';
 
   let usersBody = "";
-  let deleteOption = (environment !== 'development') ? 'style="display:none;"' : '';
-
   result.forEach(user => {
     usersBody += `<tr>
         <td>${user.id}</td>
-        <td>${user.attributes['first-name']}</td>
-        <td>${user.attributes['last-name']}</td>
+        <td>${user.attributes['user-name']}</td>
         <td>${user.attributes.email}</td>
-        <td ${deleteOption}><a href="#" data-id="${user.id}" class="deleteUser">Delete</a></td>
         </tr>`
   });
 
@@ -50,18 +41,23 @@ export function populateAPIDOM(result) {
 
 }
 
-export function removeAPIUsers(deleteLinks) {
-  Array.from(deleteLinks, link => {
-    link.onclick = function (event) {
-      const element = event.target;
-      event.preventDefault();
-      deleteUser(element.attributes["data-id"].value);
-      const row = element.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    };
-  });
-}
+export function populateAPIDOMNodes(result) {
 
+  global.document.getElementById('pageAPI').innerHTML = '<h4>API Data from: ' + baseUrl_Nodes + '</h4>';
+  global.document.getElementById('pageAPI').innerHTML += '<table><thead><th>ID</th><th>User Name</th><th>Email</th></thead><tbody id="nodes"></tbody></table>';
+
+  let nodesBody = "";
+  result.forEach(nodes => {
+    nodesBody += `<tr>
+          <td>${nodes.id}</td>
+          <td>${nodes.attributes['user-name']}</td>
+          <td>${nodes.attributes.email}</td>
+          </tr>`
+  });
+
+  global.document.getElementById('nodes').innerHTML = nodesBody;
+
+}
 
 
 function onError(error) {
