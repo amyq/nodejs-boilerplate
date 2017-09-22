@@ -4,7 +4,7 @@ export const pipelines_info = (process.env.PIPELINE_ENV || '');
 export function envToolbar() {
 
   let color = (environment === 'development') ? "#e0f0f9" : "#d7f4d2";
-  let pipelines_data;
+  let pipelines_data = '';
 
   if (pipelines_info) {
     pipelines_data += " // Pipelines Cloud Site :: " + (process.env.PIPELINE_CLOUD_SITE || 'n/a');
@@ -15,8 +15,10 @@ export function envToolbar() {
     pipelines_data = ' // local build';
   }
 
-  let markup = '<div style="background-color:' + color + ';"> environment :: ' + environment + pipelines_data + ' </div>'
-  global.document.getElementById('env-toolbar').innerHTML = markup;
+  if (environment !== undefined && environment !== null) {
+    let markup = '<div style="background-color:' + color + ';"> environment :: ' + environment + pipelines_data + ' </div>'
+    global.document.getElementById('env-toolbar').innerHTML = markup;
+  }
 
 }
 

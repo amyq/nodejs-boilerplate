@@ -83,20 +83,6 @@ function tableRow(data, type) {
   return row;
 }
 
-export function removeAPIUsers(deleteLinks) {
-  Array.from(deleteLinks, link => {
-    link.onclick = function (event) {
-      const element = event.target;
-      event.preventDefault();
-      deleteUser(element.attributes["data-id"].value);
-      const row = element.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    };
-  });
-}
-
-
-
 function onError(error) {
   console.log(error); // eslint-disable-line no-console
 }
