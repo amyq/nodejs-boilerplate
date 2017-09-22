@@ -1,8 +1,19 @@
+import env from 'node-env-file';
+import path from 'path';
 import requestPromise from 'request-promise';
-import config from '../app.config';
+import appConfig from '../app.config';
+import {
+  environment
+} from './envDetect.js';
+
+const config = appConfig(environment || 'production');
+
+env(path.join(__dirname, '../.env'), {
+  raise: false
+});
 
 export function proxyRequest() {
-  return function(req, res, next) {
+  return function (req, res, next) {
     let options = {
       uri: config.baseUrl + config.apiPrefix + '/' + req.params.path,
       headers: Object.assign(req.headers, {

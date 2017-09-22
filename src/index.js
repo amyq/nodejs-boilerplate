@@ -1,36 +1,44 @@
 import './main.css';
 
+// Imports for OAuth / External API
 import {
   getContent,
-  updateContentLists,
-  removeAPIUsers
+  updateContentLists
 } from './api/api';
 
+// Imports for Local Mock  / External API
 import {
-  envToolbar, envDump
+  getUsers,
+  populateAPIDOMUsers,
+  getNodes,
+  populateAPIDOMNodes
+} from './api/mockAPI';
+
+import {
+  envToolbar,
+  envDump
 } from '../buildScripts/envDetect.js';
 
-// Populate table of users via API call.
-let typesToGet = ['user', 'page'];
-typesToGet.forEach(type => {
-  getContent(type).then(result => {
-
-    // Populate initial API users.
-    updateContentLists(result.shift(), type);
-
-    // @todo: this isn't configured to work with the drupal jsonapi.
-    // Remove from local faux db.
-    // removeAPIUsers(global.document.getElementsByClassName('deleteUser'));
+if (process.env.NODE_ENV === 'development') {
+  getUsers().then(result => {
+    populateAPIDOMUsers(result.data);
   });
-})
+  getNodes().then(result => {
+    populateAPIDOMNodes(result.data);
+  });
+}
 
-// Populate environment toolbar. 
-envToolbar();
+if (process.env.NODE_ENV !== 'development') {
+  // Populate table of users via API call.
+  let typesToGet = ['user', 'page'];
+  typesToGet.forEach(type => {
+    getContent(type).then(result => {
+      // Populate initial API users.
+      updateContentLists(result.shift(), type);
+    });
+  })
+}
 
-// Populate environment block. 
-envDump();
 
-/**
- * https://jsonplaceholder.typicode.com/posts 
- * https://jsonplaceholder.typicode.com/users 
- */
+envToolbar(); // Populate environment toolbar.
+envDump(); // Populate environment block.

@@ -60,4 +60,6 @@ typings/
 /dist
 .DS_Store
 /src/api/db.json
+/src/api/db_users.json
+/src/api/db_nodes.json
 dist/*

@@ -1,9 +1,13 @@
 import oauth2 from 'simple-oauth2';
 import env from 'node-env-file';
 import path from 'path';
-import config from '../app.config';
+import appConfig from '../app.config';
 
-env(path.join(__dirname, '../.env'), {raise: false});
+let config = appConfig();
+
+env(path.join(__dirname, '../.env'), {
+  raise: false
+});
 
 const oauthClient = getClient();
 const tokenConfig = getTokenConfig();
@@ -12,11 +16,11 @@ let token = null;
 function getClient() {
   let credentials = {
     client: {
-      id: process.env.OAUTH_CLIENT_ID,
-      secret: process.env.OAUTH_CLIENT_SECRET,
+      id: (process.env.OAUTH_CLIENT_ID || 'na'),
+      secret: (process.env.OAUTH_CLIENT_SECRET || 'na'),
     },
     auth: {
-      tokenHost: config.baseUrl
+      tokenHost: (config.baseUrl || 'na')
     }
   }
 
@@ -25,8 +29,8 @@ function getClient() {
 
 function getTokenConfig() {
   return {
-    username: process.env.OAUTH_USER,
-    password: process.env.OAUTH_PASSWORD,
+    username: (process.env.OAUTH_USER || 'na'),
+    password: (process.env.OAUTH_PASSWORD || 'na'),
   }
 }
 
