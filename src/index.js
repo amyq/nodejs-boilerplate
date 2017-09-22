@@ -29,8 +29,13 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 if (process.env.NODE_ENV !== 'development') {
-  // Populate table of users via API call.
+
+  // default text for APIs
+  global.document.getElementById('userAPI').innerHTML = 'Missing credentials for Lightning API';
+  global.document.getElementById('pageAPI').innerHTML = 'Missing credentials for Lightning API';
+
   let typesToGet = ['user', 'page'];
+  // Populate table of users via API call.
   typesToGet.forEach(type => {
     getContent(type).then(result => {
       // Populate initial API users.

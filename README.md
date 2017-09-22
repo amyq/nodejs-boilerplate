@@ -2,7 +2,7 @@
 
 This application is intended as a toolkit for the Node.js hosting platform. It includes a considerable amount of standard build tools and core configuration.  
 
-<!-- v.2 August 31 -->
+<!-- update Sept 22 -->
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -29,7 +29,20 @@ If you ran `npm run build` + `npm start` for production, you will see:
 
 ![](https://content.screencast.com/users/BedimStudios/folders/Jing/media/2028c680-8c82-4e77-a1df-72e66ccbdf4c/00002510.png "")
 
-<br>
+
+#### Setting up OAuth configuration 
+
+The API endpoints are pointing to the 'Headless Lightning' environment for production builds and require OAuth credentials. Production builds that are instantiated by `npm run build` + `npm start` locally, in addition to these command being built by Acquia pipelines when the artifact builds. This production build can be tested locally, but you will need to add OAuth credentials locally. You will also need to take a couple quick steps on the Acquia Node Hosting platform. 
+
+##### Setting up OAuth credentials locally 
+
+We have provided the proper settings for local testing in `.env.example`. To enable, just copy this file and rename to `.env`. Once you have done this, you will see the [Lightning data](https://screencast.com/t/7qiJajeimWGM).  
+
+##### Adding up OAuth credentials on Acquia Cloud
+
+Since `.env` files are not deployed and used with code, a proper approach is to offer these same variables thru the Acquia Node hosting platform. These can be added under your subscription by adding as "Environment Variables" with these same [matching values](https://screencast.com/t/04HXmL86rwb).
+
+
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -65,7 +78,7 @@ The `Mocha` test framework to target unit testing with `Chai` as the assertion l
 
 #### API Interaction 
 
-Initial mock APIs are included by default and switch based on environment variables. The initial `generate-mock-data` fires the `generateMockData.js` build script. This build script uses the module `json-schema-faker` and the build script `mockDataSchema.js`. A file is then generated to `/src/api/db.json` to emulate as a API call for dev tasks. A new file is created each time `npm start` is ran. Other common operations are included in the `/src/api/` folder, such as deleting records for the development file. The `start-mockapi` tasks then uses the `json-server` module to serve the `localhost:4201/users` endpoint for consumption. For production builds, the API location switches to an external API url to emulate a real API call. 
+Initial mock APIs are included by default and switch based on environment variables. The initial `generate-mock-data` fires the `generateMockData.js` build script. This build script uses the module `json-schema-faker` and the build script `mockDataSchema.js`. Files are then generated to `/src/api/*.json` to emulate as a API call for dev tasks. A new file is created each time `npm start` is ran. Other common operations are included in the `/src/api/` folder, such as deleting records for the development file. The `start-mockapi` tasks then uses the `json-server` module to serve the `localhost:4201/users` endpoint for consumption. For production builds, the API location switches to an external API url to emulate a real API call. 
 
 #### Environment Variables 
 
