@@ -10,21 +10,21 @@ This application is intended as a toolkit for the Node.js hosting platform. It i
 
 - Install [node.js](https://nodejs.org)
 - Run `npm install`
-- To build the development app: `npm start`
-- To build the production app: `npm run build`
+- To build the development app: `npm local`
+- To build the production app: `npm run build` + `npm start`
 
 #### What will I see when I stand up the application?
 
-If you ran `npm start` for development, you will see:
+If you ran `npm local ` for development, you will see:
 
 - A toolbar signifying you built for development 
 - The rendered API data from the mock json file
 - A link to toggle the variables stored in `process.env` 
 
-If you ran `npm run build` for production, you will see:
+If you ran `npm run build` + `npm start` for production, you will see:
 
 - A toolbar signifying you built for production 
-- The rendered API data from the external API endpoint
+- The rendered API data from the external 'Headless Lightning' API endpoint
 - A link to toggle the variables stored in `process.env` 
 
 ![](http://content.screencast.com/users/BedimStudios/folders/Jing/media/d089516e-bfe7-4e80-8df5-88b55bbebc33/00002440.png "")
