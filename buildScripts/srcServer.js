@@ -29,6 +29,7 @@ if (process.env.NODE_ENV !== 'development') { // skip OAuth for local mock api.
   ]);
 }
 
+/*eslint-disable no-console */
 app.listen(port, function (err) {
   if (err) {
     console.log(err);

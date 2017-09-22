@@ -1,7 +1,7 @@
 import oauth2 from 'simple-oauth2';
 import env from 'node-env-file';
 import path from 'path';
-import {environment} from './envDetect.js';
+// import {environment} from './envDetect.js';
 import appConfig from '../app.config';
 
 let config = appConfig();

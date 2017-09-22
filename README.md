@@ -10,12 +10,12 @@ This application is intended as a toolkit for the Node.js hosting platform. It i
 
 - Install [node.js](https://nodejs.org)
 - Run `npm install`
-- To build the development app: `npm local`
+- To build the development app: `npm run local`
 - To build the production app: `npm run build` + `npm start`
 
 #### What will I see when I stand up the application?
 
-If you ran `npm local ` for development, you will see:
+If you ran `npm run local` for development, you will see:
 
 - A toolbar signifying you built for development 
 - The rendered API data from the mock json file
@@ -27,7 +27,7 @@ If you ran `npm run build` + `npm start` for production, you will see:
 - The rendered API data from the external 'Headless Lightning' API endpoint
 - A link to toggle the variables stored in `process.env` 
 
-![](http://content.screencast.com/users/BedimStudios/folders/Jing/media/d089516e-bfe7-4e80-8df5-88b55bbebc33/00002440.png "")
+![](https://content.screencast.com/users/BedimStudios/folders/Jing/media/2028c680-8c82-4e77-a1df-72e66ccbdf4c/00002510.png "")
 
 <br>
 
@@ -73,7 +73,7 @@ For the sake of testing, node processes which are stored in process.env are expo
 
 #### CI Integration
 
-The continuous integration is validated thru TravisCI as part of the normal github workflow. The local storage reference for TravisCI is stored in the `.travis.yml` file.
+The continuous integration is validated thru TravisCI as part of the normal github workflow. The local storage reference for TravisCI is stored in the `.travis.yml` file. A working example `acquia-pipelines.yml` file is also included with this repository, which is needed for an Acquia Node.js pipelines artifact build. 
 
 #### Production Builds
 
@@ -90,10 +90,10 @@ The `npm run build` starts the process of a deployment build. This starts by cle
 
 This starter-kit utilizes NPM scripts in the packages.json file for workflow items. These scripts run implicit commands from the file, but also reference build scripts located in “buildScripts/”. 
 
-#### `npm start` command sequence for dev
+#### `npm run local` command sequence for dev
 
-- `prestart` runs creates a dev message to your terminal
-- `npm start`  runs in parallel with the code `npm-run-all --parallel` a collection of commands
+- `prelocal` runs creates a dev message to your terminal
+- `local`  runs in parallel with the code `npm-run-all --parallel` a collection of commands
 - `security-check` module security scan for packages
 - `build-sass` compiles and watches for sass changes to css 
 - `build-dev` fires build tasks with stands up the local website
@@ -105,12 +105,11 @@ This starter-kit utilizes NPM scripts in the packages.json file for workflow ite
 - `start-mockapi` starts the `json-server` and points to the local db.json file
 
 
-#### `npm run build` command sequence for production
+#### `npm run build` + `npm start` command sequence for production
 
 - `clean-dist` clear out existing `/dist` folder 
 - `prebuild` preparation tasks around messaging, testing dev code, and linting
 - `build` build tasks to prepare deployment code structure
 - `postbuild` serving up local assets thru completed codebase 
-- `deploy` empty and waiting on TODO
 
 

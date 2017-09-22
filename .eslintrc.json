@@ -16,5 +16,8 @@
   },
   "rules": {
     "no-console": 1
+  },
+  "globals": {
+    "Promise": true
   }
 }
