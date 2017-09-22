@@ -5,7 +5,6 @@ export default function appConfig(environment = 'production') {
     apiPrefix: '/jsonapi',
     resourcePaths: {
       user: '/user/user',
-      userRole: 'user_role/user_role',
       page: '/node/page',
     }
   }

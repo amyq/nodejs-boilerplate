@@ -6,6 +6,8 @@ import {
   environment
 } from './envDetect.js';
 
+const config = appConfig(environment || 'production');
+
 env(path.join(__dirname, '../.env'), {
   raise: false
 });
@@ -13,7 +15,7 @@ env(path.join(__dirname, '../.env'), {
 export function proxyRequest() {
   return function (req, res, next) {
     let options = {
-      uri: appConfig(environment || 'production').baseUrl + appConfig().apiPrefix + '/' + req.params.path,
+      uri: config.baseUrl + config.apiPrefix + '/' + req.params.path,
       headers: Object.assign(req.headers, {
         'Content-Type': 'application/vnd.api+json',
         'accept': 'application/vnd.api+json',

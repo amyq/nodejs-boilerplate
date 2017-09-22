@@ -4,6 +4,11 @@ import open from 'open';
 import compression from 'compression';
 import * as auth from './authenticationController';
 import * as proxy from './apiProxyController';
+import {
+  validOAuth
+} from '../buildScripts/envAuth.js';
+
+/*eslint-disable no-console */
 
 const port = (process.env.PORT || 8080);
 const app = express();
@@ -15,15 +20,15 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-// Proxy the external API to allow machine-to-machine authentication, per the
-// Oauth client credentials grant flow.
-app.get('/api/:path(*)', [
-  auth.authenticateRequest(),
-  proxy.proxyRequest(),
-  // @todo: add an error handler
-]);
+// Proxy the external API to allow machine-to-machine authentication, per the Oauth client credentials grant flow.
+if (validOAuth) { // Validate Lighting OAuth creds
+  app.get('/api/:path(*)', [
+    auth.authenticateRequest(),
+    proxy.proxyRequest(),
+    // @todo: add an error handler
+  ]);
+}
 
-/* eslint-disable no-console */
 app.listen(port, function (err) {
   if (err) {
     console.log(err);
