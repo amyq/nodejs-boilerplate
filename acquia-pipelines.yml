@@ -1,7 +1,7 @@
 version: 1.0.0
 variables:
   global:
-    HOSTING_API_STAGE: canary
+    HOSTING_API_STAGE: prod
 events:
   build:
     steps:
